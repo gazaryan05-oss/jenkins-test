@@ -1,2 +1,1 @@
-FROM alpine:latest
-CMD ["echo", "Hello from updated Jenkins!"]
+CMD ["echo", "Hello from Jenkins automatic build!"]
