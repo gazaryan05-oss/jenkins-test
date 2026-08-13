@@ -1,6 +1,10 @@
 pipeline {
     agent any
 
+    tools {
+        sonarQube 'SonarScanner'
+    }
+
     stages {
         stage('Build') {
             steps {
@@ -11,7 +15,7 @@ pipeline {
         stage('SonarQube Analysis') {
             steps {
                 withSonarQubeEnv('SonarQube') {
-                    sh '/opt/homebrew/bin/sonar-scanner -Dsonar.projectKey=my-project -Dsonar.sources=.'
+                    sh 'sonar-scanner -Dsonar.projectKey=my-project -Dsonar.sources=.'
                 }
             }
         }
