@@ -1,11 +1,18 @@
 pipeline {
     agent any
+
     stages {
-        stage('Build Docker Image') {
+        stage('Build') {
             steps {
-                echo 'Starting Docker build...'
-                sh 'docker build -t my-jenkins-app:latest .'
-                echo 'Docker build completed!'
+                echo 'Building project...'
+            }
+        }
+
+        stage('SonarQube Analysis') {
+            steps {
+                withSonarQubeEnv('SonarQube') {
+                    sh 'sonar-scanner -Dsonar.projectKey=my-project -Dsonar.sources=.'
+                }
             }
         }
     }
