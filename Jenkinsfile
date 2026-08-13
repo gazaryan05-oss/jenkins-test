@@ -1,10 +1,5 @@
-
 pipeline {
     agent any
-
-    tools {
-        sonarQube 'SonarScanner'   // добавляем эту строку
-    }
 
     stages {
         stage('Build') {
@@ -16,7 +11,7 @@ pipeline {
         stage('SonarQube Analysis') {
             steps {
                 withSonarQubeEnv('SonarQube') {
-                    sh 'sonar-scanner -Dsonar.projectKey=my-project -Dsonar.sources=.'
+                    sh '/opt/homebrew/bin/sonar-scanner -Dsonar.projectKey=my-project -Dsonar.sources=.'
                 }
             }
         }
