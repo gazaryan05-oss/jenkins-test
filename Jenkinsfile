@@ -1,5 +1,10 @@
+
 pipeline {
     agent any
+
+    tools {
+        sonarQube 'SonarScanner'   // добавляем эту строку
+    }
 
     stages {
         stage('Build') {
@@ -10,7 +15,7 @@ pipeline {
 
         stage('SonarQube Analysis') {
             steps {
-                withSonarQubeEnv('SonarQube') {   // ← Имя из настроек
+                withSonarQubeEnv('SonarQube') {
                     sh 'sonar-scanner -Dsonar.projectKey=my-project -Dsonar.sources=.'
                 }
             }
